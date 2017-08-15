@@ -1,0 +1,57 @@
+ECIP-1017 (Monetary Policy) Testing tool
+========================================
+
+# Project Idea
+
+ECIP-1017 https://github.com/ethereumproject/ECIPs/blob/master/ECIPs/ECIP-1017.md
+
+Emulate a lifecycle of a network of ETC nodes through few monetary supply eras and verify that network works
+ as expected without interruptions and produces correct reward.
+
+# Implementation
+
+## Network
+
+Run a network in a Google Cloud with Kubernetes. That allows to run testing by any 3rd party, it takes minutes to
+ setup Google Cloud account and should cost less that a $100 for the full testing scenario.
+
+Preconfigured network topology to cover most of real life edges:
+ * Geth-Geth, Parity-Parity, Geth-Parity
+ * fake Dapps to produces transactions
+ * mining
+ * loose connection between subnetworks
+
+image:topology.png[]
+
+## Running
+
+### Docker containers
+
+All images are already prepared and deployed to Docker Hub registry. If you want to use custom modification then
+ most simple way would be to deploy your custom images directly to Google Cloud Containers registry, you'll need to
+ update names in `k18s/*.rc.yaml` and use `bin/build.sh`.
+
+To use existing containers you don't need to do anything.
+
+### Deploy
+
+Run
+```
+bin/deploy.sh <GOOGLE_CLOUD_ID>
+```
+
+### Check status
+
+```
+bin/status.py
+```
+
+### Verify state
+
+```
+bin/verify.py
+```
+
+
+
+
