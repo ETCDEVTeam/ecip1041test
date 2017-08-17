@@ -26,6 +26,9 @@ def get_height(node_id):
 def get_hash(node_id, height):
     return rpc_call(node_id, "eth_getBlockByNumber", [height, False])
 
+def get_peers(node_id):
+    return rpc_call(node_id, "net_peerCount", [])
+
 def rpc_call(pod_id, method, params):
     config.load_kube_config()
     api = client.CoreV1Api()
@@ -65,13 +68,14 @@ def list():
     config.load_kube_config()
     v1 = client.CoreV1Api()
     print("Nodes status")
-    print("%s\t\t\t%s\t%s" % ("ID", "HEIGHT", "HASH"))
+    print("%s\t\t\t%s\t%s\t%s" % ("ID", "PEERS", "HEIGHT", "HASH"))
     ret = v1.list_namespaced_pod("default", watch=False)
     for i in ret.items:
         pod_id = i.metadata.name
         height = get_height(pod_id)
         hash = get_hash(pod_id, height)["hash"]
-        print("%s\t%s\t%s" % (pod_id, int(height, 16), hash))
+        peers = get_peers(pod_id)
+        print("%s\t%s\t%s\t%s" % (pod_id, int(peers, 16), int(height, 16), hash))
 
 
 if __name__ == "__main__":
