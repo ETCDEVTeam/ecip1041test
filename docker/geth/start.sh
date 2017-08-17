@@ -9,7 +9,12 @@ echo "-------------------------------------------------------"
 
 OPTS=""
 
-python ids.py node-id $NODE_ID > nodekey.txt
+python ids.py node-pk $NODE_ID > nodekey.txt
+NODE_PK=$(python ids.py node-id $NODE_ID)
+echo "ID: $NODE_PK"
+
+NODE_IP="0.0.0.0" #$(host $NODE_ID | awk '/has address/ { print $4 ; exit }')
+echo "IP: $NODE_IP"
 
 touch bootnodes.txt
 while IFS=',' read -ra PEERS; do
@@ -42,6 +47,7 @@ OPTS="$OPTS --chain ecip1017"
 OPTS="$OPTS --no-discover"
 OPTS="$OPTS --nodekey nodekey.txt"
 OPTS="$OPTS --etherbase $NODEADDR"
+OPTS="$OPTS --nat extip:$NODE_IP"
 
 
 #OPTS="$OPTS"

@@ -11,10 +11,17 @@ def sha512(s):
     hash.update(s)
     return hash.hexdigest()
 
-def get_node_id(name):
+def to_hex(key):
+    return codecs.encode(key.to_string(), 'hex')
+
+def get_node_pk(name):
     priv = ecdsa.SigningKey.from_string(sha512(name)[:32], curve=ecdsa.SECP256k1)
+    return priv
+
+def get_node_id(name):
+    priv = get_node_pk(name)
     pub = priv.get_verifying_key()
-    return codecs.encode(pub.to_string(), 'hex')
+    return to_hex(pub)
 
 def get_addr_pk(name):
     priv = ecdsa.SigningKey.from_string(sha512(name)[:32], curve=ecdsa.SECP256k1)
@@ -27,13 +34,16 @@ def get_addr_pub(name):
     hash.update(pub)
     return hash.hexdigest()[24:]
 
+
 if __name__ == '__main__':
     type = sys.argv[1]
     if type == 'node-id':
         print get_node_id(sys.argv[2])
+    elif type == 'node-pk':
+        print to_hex(get_node_pk(sys.argv[2]))
     elif type == 'addr':
         print "".join(["0x", get_addr_pub(sys.argv[2])])
     elif type == 'pk':
-        print codecs.encode(get_addr_pk(sys.argv[2]).to_string(), 'hex')
+        print to_hex(get_addr_pk(sys.argv[2]))
     else:
         print "Unknown command"
