@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 PROJECT_ID=$1
 PROJECT_ZONE=$2
 PROJECT_CLUSTER=$3
