@@ -16,6 +16,7 @@ Run a network in a Google Cloud with Kubernetes. That allows to run testing by a
  setup Google Cloud account and should cost less that a $100 for the full testing scenario.
 
 Preconfigured network topology to cover most of real life edges:
+
  * Geth-Geth, Parity-Parity, Geth-Parity
  * fake Dapps to produces transactions
  * mining
@@ -37,19 +38,19 @@ To use existing containers you don't need to do anything.
 
 Run
 ```
-bin/deploy.sh <GOOGLE_CLOUD_ID>
+bin/deploy.sh <GOOGLE_CLOUD_ID> <GOOGLE_ZONE_ID> <GOOGLE_CLUSTER_ID>
 ```
 
 ### Check status
 
 ```
-bin/status.py
+./bin/status.py
 ```
 
 ### Verify state
 
 ```
-bin/verify.py
+./bin/verify.py
 ```
 
 
