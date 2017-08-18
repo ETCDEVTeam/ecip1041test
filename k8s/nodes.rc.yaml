@@ -55,8 +55,8 @@ items:
                   value: gm1
                 - name: NODE_PEERS
                   value: "g1,g2"
-            - name: ethminer
-              image: "etcdev/ecip1017-ethminer:latest"
+                - name: NODE_MODE
+                  value: "miner"
   - kind: ReplicationController
     apiVersion: v1
     metadata:

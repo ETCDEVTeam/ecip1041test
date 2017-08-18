@@ -44,13 +44,17 @@ OPTS="$OPTS --datadir /data"
 OPTS="$OPTS --rpc --rpcaddr 0.0.0.0"
 OPTS="$OPTS --chain ecip1017"
 #OPTS="$OPTS --bootnodes $BOOT --no-discover"
-OPTS="$OPTS --no-discover"
+#OPTS="$OPTS --no-discover"
 OPTS="$OPTS --nodekey nodekey.txt"
 OPTS="$OPTS --etherbase $NODEADDR"
 OPTS="$OPTS --nat extip:$NODE_IP"
 
 
 #OPTS="$OPTS"
+
+if [ "$NODE_MODE" == "miner" ]; then
+    OPTS="$OPTS --mine"
+fi
 
 echo "-------------------------------------------------------"
 echo "Run Geth:"
