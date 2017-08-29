@@ -41,6 +41,7 @@ cp ./chain.json /data/ecip1017/chain.json
 NODEADDR=$(python ids.py addr $NODE_ID)
 
 OPTS="$OPTS --datadir /data"
+OPTS="$OPTS --port 40404"
 OPTS="$OPTS --rpc --rpcaddr 0.0.0.0"
 OPTS="$OPTS --chain ecip1017"
 #OPTS="$OPTS --bootnodes $BOOT --no-discover"
@@ -55,6 +56,16 @@ OPTS="$OPTS --nat extip:$NODE_IP"
 if [ "$NODE_MODE" == "miner" ]; then
     OPTS="$OPTS --mine"
 fi
+
+echo "-------------------------------------------------------"
+echo "Setup network simulation"
+echo "-------------------------------------------------------"
+
+toxiproxy-server &
+sleep 1
+toxiproxy-cli create geth -l localhost:30303 -u localhost:40404
+toxiproxy-cli toxic add geth -t latency -a latency=700 -a jitter=300
+toxiproxy-cli list
 
 echo "-------------------------------------------------------"
 echo "Run Geth:"
