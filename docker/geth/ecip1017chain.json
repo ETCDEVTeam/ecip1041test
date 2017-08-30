@@ -78,13 +78,13 @@
       },
       {
         "name": "Gotham",
-        "block": 100,
+        "block": 500,
         "features": [
           {
             "id": "reward",
             "options": {
               "type": "ecip1017",
-              "era": 100
+              "era": 500
             }
           }
         ]
