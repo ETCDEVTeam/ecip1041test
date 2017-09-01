@@ -12,6 +12,7 @@ items:
       - name: p2p-udp
         port: 30303
         protocol: UDP
+        targetPort: 40404
       - name: p2p-tcp
         port: 30303
         protocol: TCP
@@ -26,6 +27,7 @@ items:
       - name: p2p-udp
         port: 30303
         protocol: UDP
+        targetPort: 40404
       - name: p2p-tcp
         port: 30303
         protocol: TCP
@@ -40,8 +42,24 @@ items:
       - name: p2p-udp
         port: 30303
         protocol: UDP
+        targetPort: 40404
       - name: p2p-tcp
         port: 30303
         protocol: TCP
       selector:
         name: node-gm1
+  - apiVersion: v1
+    kind: Service
+    metadata:
+      name: gm2
+    spec:
+      ports:
+      - name: p2p-udp
+        port: 30303
+        protocol: UDP
+        targetPort: 40404
+      - name: p2p-tcp
+        port: 30303
+        protocol: TCP
+      selector:
+        name: node-gm2

@@ -24,6 +24,11 @@ items:
                 - name: p2p
                   hostPort: 30303
                   containerPort: 30303
+                  protocol: TCP
+                - name: p2p-udp
+                  hostPort: 40404
+                  containerPort: 40404
+                  protocol: UDP
               env:
                 - name: NODE_ID
                   value: g1
@@ -50,6 +55,11 @@ items:
                 - name: p2p
                   hostPort: 30303
                   containerPort: 30303
+                  protocol: TCP
+                - name: p2p-udp
+                  hostPort: 40404
+                  containerPort: 40404
+                  protocol: UDP
               env:
                 - name: NODE_ID
                   value: gm1
@@ -78,8 +88,44 @@ items:
                 - name: p2p
                   hostPort: 30303
                   containerPort: 30303
+                - name: p2p-udp
+                  hostPort: 40404
+                  containerPort: 40404
+                  protocol: UDP
               env:
                 - name: NODE_ID
                   value: g2
                 - name: NODE_PEERS
-                  value: "gm1"
+                  value: "gm1,gm2"
+  - kind: ReplicationController
+    apiVersion: v1
+    metadata:
+      name: node-gm2-rc
+    spec:
+      replicas: 1
+      template:
+        metadata:
+          labels:
+            type: node
+            name: node-gm2
+        spec:
+          containers:
+            - name: geth
+              image: "etcdev/ecip1017-geth:latest"
+              ports:
+                - name: rpc
+                  containerPort: 8545
+                - name: p2p
+                  hostPort: 30303
+                  containerPort: 30303
+                - name: p2p-udp
+                  hostPort: 40404
+                  containerPort: 40404
+                  protocol: UDP
+              env:
+                - name: NODE_ID
+                  value: gm2
+                - name: NODE_PEERS
+                  value: "g2"
+                - name: NODE_MODE
+                  value: "miner"

@@ -28,6 +28,7 @@ RUN chmod +x /opt/geth/start.sh
 EXPOSE 8545
 EXPOSE 30303
 EXPOSE 30303/udp
+EXPOSE 40404/udp
 
 WORKDIR /opt/geth
 

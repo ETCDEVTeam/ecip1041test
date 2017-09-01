@@ -13,7 +13,7 @@ python ids.py node-pk $NODE_ID > nodekey.txt
 NODE_PK=$(python ids.py node-id $NODE_ID)
 echo "ID: $NODE_PK"
 
-NODE_IP="0.0.0.0" #$(host $NODE_ID | awk '/has address/ { print $4 ; exit }')
+NODE_IP=$(host $NODE_ID | awk '/has address/ { print $4 ; exit }')
 echo "IP: $NODE_IP"
 
 touch bootnodes.txt
@@ -48,7 +48,8 @@ OPTS="$OPTS --chain ecip1017"
 #OPTS="$OPTS --no-discover"
 OPTS="$OPTS --nodekey nodekey.txt"
 OPTS="$OPTS --etherbase $NODEADDR"
-OPTS="$OPTS --nat extip:$NODE_IP"
+OPTS="$OPTS --nat extip:127.0.0.1"
+#OPTS="$OPTS --verbosity 6"
 
 
 #OPTS="$OPTS"
@@ -63,7 +64,7 @@ echo "-------------------------------------------------------"
 
 toxiproxy-server &
 sleep 1
-toxiproxy-cli create geth -l localhost:30303 -u localhost:40404
+toxiproxy-cli create geth -l 0.0.0.0:30303 -u localhost:40404
 toxiproxy-cli toxic add geth -t latency -a latency=700 -a jitter=300
 toxiproxy-cli list
 
