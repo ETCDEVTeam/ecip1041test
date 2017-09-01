@@ -36,12 +36,17 @@ def check_fork():
         print("!!!! Fork detected !!!!")
         fork_block = find_fork(api, pods, 0, min_height)
         print("Fork happened at %s" % fork_block)
-        print("%s\t\t\t%s\t%s" % ("ID", "HEIGHT", "HASH"))
-        for pod_id in pods:
-            hash = api.get_hash(pod_id, fork_block)["hash"]
-            print("%s\t%s\t%s" % (pod_id, fork_block, hash))
+        show_at_height(api, pods, fork_block)
     else:
         print("Ok. No Fork detected")
+        show_at_height(api, pods, min_height)
+
+
+def show_at_height(api, pods, height):
+    print("%s\t\t\t%s\t%s" % ("ID", "HEIGHT", "HASH"))
+    for pod_id in pods:
+        hash = api.get_hash(pod_id, height)["hash"]
+        print("%s\t%s\t%s" % (pod_id, height, hash))
 
 
 def list():
