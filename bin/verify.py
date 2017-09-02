@@ -39,12 +39,12 @@ class Era:
         if self.era == 0:
             d = 8 + uncle_height - height
             return toWei(5) * d / 8
-        return toWei(coef(0.125, self.era))
+        return self.get_block_reward() / 32
 
     def get_uncle_finder_reward(self):
         if self.era == 0:
             return toWei(5) / 32
-        return toWei(coef(0.125, self.era))
+        return self.get_block_reward() / 32
 
 class ChainState:
     def __init__(self, api):
