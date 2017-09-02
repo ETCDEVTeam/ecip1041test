@@ -12,7 +12,7 @@ items:
       - name: p2p-udp
         port: 30303
         protocol: UDP
-        targetPort: 40404
+        targetPort: 30303
       - name: p2p-tcp
         port: 30303
         protocol: TCP
@@ -27,7 +27,7 @@ items:
       - name: p2p-udp
         port: 30303
         protocol: UDP
-        targetPort: 40404
+        targetPort: 30303
       - name: p2p-tcp
         port: 30303
         protocol: TCP
@@ -42,7 +42,7 @@ items:
       - name: p2p-udp
         port: 30303
         protocol: UDP
-        targetPort: 40404
+        targetPort: 30303
       - name: p2p-tcp
         port: 30303
         protocol: TCP
@@ -57,7 +57,7 @@ items:
       - name: p2p-udp
         port: 30303
         protocol: UDP
-        targetPort: 40404
+        targetPort: 30303
       - name: p2p-tcp
         port: 30303
         protocol: TCP
