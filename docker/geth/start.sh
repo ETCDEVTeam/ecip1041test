@@ -64,8 +64,8 @@ echo "-------------------------------------------------------"
 
 toxiproxy-server &
 sleep 1
-toxiproxy-cli create geth -l 0.0.0.0:40404 -u localhost:30303
-toxiproxy-cli toxic add geth -t latency -a latency=700 -a jitter=300
+toxiproxy-cli create p2p -l 0.0.0.0:40404 -u localhost:30303
+toxiproxy-cli toxic add p2p -t latency -a latency=700 -a jitter=300
 toxiproxy-cli list
 
 echo "-------------------------------------------------------"

@@ -43,6 +43,16 @@ OPTS="$OPTS --nat extip:0.0.0.0"
 OPTS="$OPTS --jsonrpc-hosts all --jsonrpc-interface all --jsonrpc-port 8545"
 
 echo "-------------------------------------------------------"
+echo "Setup network simulation"
+echo "-------------------------------------------------------"
+
+toxiproxy-server &
+sleep 1
+toxiproxy-cli create p2p -l 0.0.0.0:40404 -u localhost:30303
+toxiproxy-cli toxic add p2p -t latency -a latency=700 -a jitter=300
+toxiproxy-cli list
+
+echo "-------------------------------------------------------"
 echo "Run Parity:"
 echo "    $OPTS"
 echo "-------------------------------------------------------"
