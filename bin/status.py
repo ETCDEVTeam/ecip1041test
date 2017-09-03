@@ -13,7 +13,7 @@ def same_fork(hashes):
 
 def find_fork(api, pods, no_fork_at, fork_at):
     check_height = no_fork_at + int((fork_at - no_fork_at) / 2)
-    hashes = [api.get_hash(pod_id, hex(check_height))["hash"] for pod_id in pods]
+    hashes = [api.get_block(pod_id, hex(check_height))["hash"] for pod_id in pods]
     if not same_fork(hashes):
         return find_fork(api, pods, no_fork_at, check_height)
     else:
@@ -31,7 +31,7 @@ def check_fork():
     if min_height <= 0:
         print("Ok. Blockchain has less than 10 blocks")
         return 
-    hashes = [api.get_hash(pod_id, hex(min_height))["hash"] for pod_id in pods]
+    hashes = [api.get_block(pod_id, hex(min_height))["hash"] for pod_id in pods]
     if not same_fork(hashes):
         print("!!!! Fork detected !!!!")
         fork_block = find_fork(api, pods, 0, min_height)
@@ -45,7 +45,7 @@ def check_fork():
 def show_at_height(api, pods, height):
     print("%s\t\t\t%s\t%s" % ("ID", "HEIGHT", "HASH"))
     for pod_id in pods:
-        hash = api.get_hash(pod_id, height)["hash"]
+        hash = api.get_block(pod_id, hex(height))["hash"]
         print("%s\t%s\t%s" % (pod_id, height, hash))
 
 
@@ -56,7 +56,7 @@ def list():
     pods = api.get_nodes()
     for pod_id in pods:
         height = api.get_height(pod_id)
-        hash = api.get_hash(pod_id, height)["hash"]
+        hash = api.get_block(pod_id, height)["hash"]
         peers = api.get_peers(pod_id)
         print("%s\t%s\t%s\t%s" % (pod_id, int(peers, 16), int(height, 16), hash))
 

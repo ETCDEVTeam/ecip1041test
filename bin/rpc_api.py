@@ -22,14 +22,13 @@ class RpcApi:
     def get_height(self, node_id):
         return self.rpc_call(node_id, "eth_blockNumber", [])
 
-    def get_hash(self, node_id, height):
-        return self.rpc_call(node_id, "eth_getBlockByNumber", [height, False])
-
     def get_peers(self, node_id):
         return self.rpc_call(node_id, "net_peerCount", [])
 
     def get_block(self, node_id, num):
-        return self.rpc_call(node_id, "eth_getBlockByNumber", [hex(num), False])
+        if type(num) is int:
+            num=hex(num)
+        return self.rpc_call(node_id, "eth_getBlockByNumber", [num, False])
 
     def get_uncles(self, node_id, block):
         uncles = range(0, len(block["uncles"]))
