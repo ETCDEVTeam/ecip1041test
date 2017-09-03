@@ -40,6 +40,7 @@ OPTS="$OPTS --reserved-peers bootnodes.txt"
 OPTS="$OPTS --nodekey nodekey.txt"
 OPTS="$OPTS --author $NODEADDR"
 OPTS="$OPTS --nat extip:0.0.0.0"
+OPTS="$OPTS --jsonrpc-hosts all --jsonrpc-interface all --jsonrpc-port 8545"
 
 echo "-------------------------------------------------------"
 echo "Run Parity:"
