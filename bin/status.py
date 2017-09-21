@@ -27,7 +27,8 @@ def check_fork():
     print("Checking for a fork...")
     api = rpc_api.RpcApi()
     pods = api.get_nodes()
-    min_height = min([int(api.get_height(pod_id), 16) for pod_id in pods]) - 10
+    height = min([int(api.get_height(pod_id), 16) for pod_id in pods])
+    min_height = height - 10
     if min_height <= 0:
         print("Ok. Blockchain has less than 10 blocks")
         return 
@@ -39,7 +40,12 @@ def check_fork():
         show_at_height(api, pods, fork_block)
     else:
         print("Ok. No Fork detected")
+        print("")
+        print("Last safe block:")
         show_at_height(api, pods, min_height)
+        print("")
+        print("Blockchain head block (nodes could have different head block):")
+        show_at_height(api, pods, height)
 
 
 def show_at_height(api, pods, height):
