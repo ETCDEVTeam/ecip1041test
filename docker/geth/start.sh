@@ -61,4 +61,4 @@ echo "    $OPTS"
 echo "-------------------------------------------------------"
 
 ./addpeers.sh &
-/go/bin/geth $OPTS
+geth $OPTS

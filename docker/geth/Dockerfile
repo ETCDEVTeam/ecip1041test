@@ -1,16 +1,15 @@
-FROM golang:1.8-stretch
+FROM ubuntu
 
 RUN apt-get update && \
     apt-get -y install wget unzip git jq dnsutils netcat vim
 
-RUN echo "GOPATH $GOPATH" && \
-    mkdir -p /go/src/github.com/ethereumproject && \
-    cd /go/src/github.com/ethereumproject && \
-    git clone https://github.com/ethereumproject/go-ethereum.git && \
-    cd go-ethereum && \
-    git checkout monetary-policy && \
-    go install ./cmd/geth && \
-    rm -rf /go/src/github.com/ethereumproject
+ENV GETH_VER 4.0.0
+
+RUN mkdir /opt/geth && \
+    wget --progress=dot:mega https://github.com/ethereumproject/go-ethereum/releases/download/v${GETH_VER}/geth-classic-linux-v${GETH_VER}.tar.gz && \
+    tar -zxf geth-classic-linux-v${GETH_VER}.tar.gz && \
+    mv geth /usr/local/bin/ && \
+    rm geth-classic-linux-v${GETH_VER}.tar.gz
 
 RUN apt-get -y install python-pip python-setuptools python-dev && \
     pip install ecdsa && \
