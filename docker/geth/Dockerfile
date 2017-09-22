@@ -16,7 +16,8 @@ RUN apt-get -y install python-pip python-setuptools python-dev && \
     pip install pysha3
 
 RUN wget -O toxiproxy-2.1.2.deb --progress=dot:mega https://github.com/Shopify/toxiproxy/releases/download/v2.1.2/toxiproxy_2.1.2_amd64.deb && \
-    dpkg -i toxiproxy-2.1.2.deb
+    dpkg -i toxiproxy-2.1.2.deb && \
+    rm toxiproxy-2.1.2.deb
 
 COPY docker/geth/start.sh /opt/geth/start.sh
 COPY docker/geth/addpeers.sh /opt/geth/addpeers.sh
@@ -29,7 +30,7 @@ RUN chmod +x /opt/geth/addpeers.sh
 EXPOSE 8545
 EXPOSE 30303
 EXPOSE 30303/udp
-EXPOSE 40404/udp
+EXPOSE 40404
 
 WORKDIR /opt/geth
 

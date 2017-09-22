@@ -8,7 +8,8 @@ RUN apt-get -y install python python-pip python-setuptools python-dev && \
     pip install pysha3
 
 RUN wget -O toxiproxy-2.1.2.deb --progress=dot:mega https://github.com/Shopify/toxiproxy/releases/download/v2.1.2/toxiproxy_2.1.2_amd64.deb && \
-    dpkg -i toxiproxy-2.1.2.deb
+    dpkg -i toxiproxy-2.1.2.deb && \
+    rm toxiproxy-2.1.2.deb
 
 COPY docker/parity/start.sh /opt/parity/start.sh
 COPY docker/parity/ecip1017chain.json /opt/parity/ecip1017chain.json
@@ -19,6 +20,7 @@ RUN chmod +x /opt/parity/start.sh
 EXPOSE 8545
 EXPOSE 30303
 EXPOSE 30303/udp
+EXPOSE 40404
 
 WORKDIR /opt/parity
 
