@@ -37,7 +37,7 @@ All images are already prepared and deployed to Docker Hub registry. If you want
  most simple way would be to deploy your custom images directly to Google Cloud Containers registry, you'll need to
  update names in `k18s/*.rc.yaml` and use `bin/build.sh`.
 
-To use existing containers you don't need to do anything.
+To use existing containers you don't need to do anything, just deploy as is and see status/verify.
 
 ### Google Cloud
 
@@ -51,7 +51,7 @@ Run
 bin/deploy.sh <GOOGLE_CLOUD_ID> <GOOGLE_ZONE_ID> <GOOGLE_CLUSTER_ID>
 ```
 
-For example if you have a google project `etctests` and created a GCK cluster `ecip107` with 8 nodes, run following:
+For example if you have a google project `etctests` and created a GCK cluster `ecip1017` with 8 nodes, run following:
 ```
 bin/deploy.sh etctests us-east1-b ecip1017
 ```
