@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 #
 # Gets all blocks from first to latest, builds an expected distribution of ether at the end, and
 # verifies that it's equal to the state of chain
