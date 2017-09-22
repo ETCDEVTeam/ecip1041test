@@ -16,27 +16,27 @@ echo "ID: $NODE_PK"
 NODE_IP=$(host $NODE_ID | awk '/has address/ { print $4 ; exit }')
 echo "IP: $NODE_IP"
 
-touch bootnodes.txt
+touch peers.txt
 while IFS=',' read -ra PEERS; do
     for name in ${PEERS[@]}; do
       PEER_ID=$(python ids.py node-id $name)
       PEER_HOST="$name"
       PEER_IP=$(host $PEER_HOST | awk '/has address/ { print $4 ; exit }')
-      echo "enode://$PEER_ID@${PEER_IP:-127.0.0.1}:30303" >> bootnodes.txt
+      printf "enode://$PEER_ID@${PEER_IP:-127.0.0.1}:30303\n" >> peers.txt
     done
 done <<<  "$NODE_PEERS"
 
-BOOTNODES=$(cat bootnodes.txt)
 echo "PEERS:"
-echo $BOOTNODES
+cat peers.txt
 
 NODEADDR=$(python ids.py addr $NODE_ID)
+BOOTNODES=$(tr '\n' ',' < peers.txt | sed -e 's/,$/\n/')
 
 OPTS="$OPTS --db-path /data"
 OPTS="$OPTS --chain /opt/parity/ecip1017chain.json"
 OPTS="$OPTS --no-discovery"
-OPTS="$OPTS --reserved-only"
-OPTS="$OPTS --reserved-peers bootnodes.txt"
+OPTS="$OPTS --reserved-peers peers.txt"
+OPTS="$OPTS --bootnodes $BOOTNODES"
 OPTS="$OPTS --nodekey nodekey.txt"
 OPTS="$OPTS --author $NODEADDR"
 OPTS="$OPTS --nat extip:0.0.0.0"
