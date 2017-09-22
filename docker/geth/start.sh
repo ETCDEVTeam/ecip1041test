@@ -46,7 +46,13 @@ echo "-------------------------------------------------------"
 toxiproxy-server &
 sleep 1
 toxiproxy-cli create p2p -l 0.0.0.0:40404 -u localhost:30303
-toxiproxy-cli toxic add p2p -t latency -a latency=700 -a jitter=300
+CONN_LATENCY=200
+CONN_JITTER=100
+if [ "$NODE_CONN" == "loose" ]; then
+    CONN_LATENCY=700
+    CONN_JITTER=300
+fi
+toxiproxy-cli toxic add p2p -t latency -a latency=${CONN_LATENCY} -a jitter=${CONN_JITTER}
 toxiproxy-cli list
 
 echo "-------------------------------------------------------"
