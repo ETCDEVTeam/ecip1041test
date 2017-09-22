@@ -1,7 +1,7 @@
 FROM parity/parity:v1.7.2
 
 RUN apt-get update && \
-    apt-get -y install wget unzip jq dnsutils
+    apt-get -y install wget unzip jq dnsutils netcat vim
 
 RUN apt-get -y install python python-pip python-setuptools python-dev && \
     pip install ecdsa && \

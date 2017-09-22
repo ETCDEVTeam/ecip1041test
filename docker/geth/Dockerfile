@@ -1,7 +1,7 @@
 FROM golang:1.8-stretch
 
 RUN apt-get update && \
-    apt-get -y install wget unzip git jq dnsutils
+    apt-get -y install wget unzip git jq dnsutils netcat vim
 
 RUN echo "GOPATH $GOPATH" && \
     mkdir -p /go/src/github.com/ethereumproject && \
