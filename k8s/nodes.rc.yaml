@@ -6,37 +6,6 @@ items:
   - kind: ReplicationController
     apiVersion: v1
     metadata:
-      name: node-g1-rc
-    spec:
-      replicas: 1
-      template:
-        metadata:
-          labels:
-            type: node
-            name: node-g1
-        spec:
-          containers:
-            - name: geth
-              image: "etcdev/ecip1017-geth:latest"
-              ports:
-                - name: rpc
-                  containerPort: 8545
-                - name: p2p
-                  hostPort: 30303
-                  containerPort: 40404
-                  protocol: TCP
-                - name: p2p-udp
-                  hostPort: 30303
-                  containerPort: 30303
-                  protocol: UDP
-              env:
-                - name: NODE_ID
-                  value: g1
-                - name: NODE_PEERS
-                  value: "gm1"
-  - kind: ReplicationController
-    apiVersion: v1
-    metadata:
       name: node-gm1-rc
     spec:
       replicas: 1
@@ -47,7 +16,7 @@ items:
             name: node-gm1
         spec:
           containers:
-            - name: geth
+            - name: node
               image: "etcdev/ecip1017-geth:latest"
               ports:
                 - name: rpc
@@ -64,9 +33,73 @@ items:
                 - name: NODE_ID
                   value: gm1
                 - name: NODE_PEERS
-                  value: "g1,g2"
+                  value: "g1,p1"
                 - name: NODE_MODE
                   value: "miner"
+  - kind: ReplicationController
+    apiVersion: v1
+    metadata:
+      name: node-gm2-rc
+    spec:
+      replicas: 1
+      template:
+        metadata:
+          labels:
+            type: node
+            name: node-gm2
+        spec:
+          containers:
+            - name: node
+              image: "etcdev/ecip1017-geth:latest"
+              ports:
+                - name: rpc
+                  containerPort: 8545
+                - name: p2p
+                  hostPort: 30303
+                  containerPort: 40404
+                  protocol: TCP
+                - name: p2p-udp
+                  hostPort: 30303
+                  containerPort: 30303
+                  protocol: UDP
+              env:
+                - name: NODE_ID
+                  value: gm2
+                - name: NODE_PEERS
+                  value: "p3,g3"
+                - name: NODE_MODE
+                  value: "miner"
+  - kind: ReplicationController
+    apiVersion: v1
+    metadata:
+      name: node-g1-rc
+    spec:
+      replicas: 1
+      template:
+        metadata:
+          labels:
+            type: node
+            name: node-g1
+        spec:
+          containers:
+            - name: node
+              image: "etcdev/ecip1017-geth:latest"
+              ports:
+                - name: rpc
+                  containerPort: 8545
+                - name: p2p
+                  hostPort: 30303
+                  containerPort: 40404
+                  protocol: TCP
+                - name: p2p-udp
+                  hostPort: 30303
+                  containerPort: 30303
+                  protocol: UDP
+              env:
+                - name: NODE_ID
+                  value: g1
+                - name: NODE_PEERS
+                  value: "gm1,g2,p2"
   - kind: ReplicationController
     apiVersion: v1
     metadata:
@@ -80,7 +113,7 @@ items:
             name: node-g2
         spec:
           containers:
-            - name: geth
+            - name: node
               image: "etcdev/ecip1017-geth:latest"
               ports:
                 - name: rpc
@@ -96,21 +129,21 @@ items:
                 - name: NODE_ID
                   value: g2
                 - name: NODE_PEERS
-                  value: "gm1,gm2"
+                  value: "g1,p1,p3,g3"
   - kind: ReplicationController
     apiVersion: v1
     metadata:
-      name: node-gm2-rc
+      name: node-g3-rc
     spec:
       replicas: 1
       template:
         metadata:
           labels:
             type: node
-            name: node-gm2
+            name: node-g3
         spec:
           containers:
-            - name: geth
+            - name: node
               image: "etcdev/ecip1017-geth:latest"
               ports:
                 - name: rpc
@@ -124,11 +157,11 @@ items:
                   protocol: UDP
               env:
                 - name: NODE_ID
-                  value: gm2
+                  value: g3
                 - name: NODE_PEERS
-                  value: "g2"
-                - name: NODE_MODE
-                  value: "miner"
+                  value: "g2,p2,gm2"
+                - name: NODE_CONN
+                  value: "loose"
   - kind: ReplicationController
     apiVersion: v1
     metadata:
@@ -142,7 +175,7 @@ items:
             name: node-p1
         spec:
           containers:
-            - name: geth
+            - name: node
               image: "etcdev/ecip1017-parity:latest"
               ports:
                 - name: rpc
@@ -158,4 +191,64 @@ items:
                 - name: NODE_ID
                   value: p1
                 - name: NODE_PEERS
-                  value: "g2"
+                  value: "gm1,p2,g2"
+  - kind: ReplicationController
+    apiVersion: v1
+    metadata:
+      name: node-p2-rc
+    spec:
+      replicas: 1
+      template:
+        metadata:
+          labels:
+            type: node
+            name: node-p2
+        spec:
+          containers:
+            - name: node
+              image: "etcdev/ecip1017-parity:latest"
+              ports:
+                - name: rpc
+                  containerPort: 8545
+                - name: p2p
+                  hostPort: 30303
+                  containerPort: 40404
+                - name: p2p-udp
+                  hostPort: 30303
+                  containerPort: 30303
+                  protocol: UDP
+              env:
+                - name: NODE_ID
+                  value: p2
+                - name: NODE_PEERS
+                  value: "p1,g1,g3,p3"
+  - kind: ReplicationController
+    apiVersion: v1
+    metadata:
+      name: node-p3-rc
+    spec:
+      replicas: 1
+      template:
+        metadata:
+          labels:
+            type: node
+            name: node-p3
+        spec:
+          containers:
+            - name: node
+              image: "etcdev/ecip1017-parity:latest"
+              ports:
+                - name: rpc
+                  containerPort: 8545
+                - name: p2p
+                  hostPort: 30303
+                  containerPort: 40404
+                - name: p2p-udp
+                  hostPort: 30303
+                  containerPort: 30303
+                  protocol: UDP
+              env:
+                - name: NODE_ID
+                  value: p3
+                - name: NODE_PEERS
+                  value: "p2,g2,gm2"

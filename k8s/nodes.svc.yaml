@@ -6,36 +6,6 @@ items:
   - apiVersion: v1
     kind: Service
     metadata:
-      name: g1
-    spec:
-      ports:
-      - name: p2p-udp
-        port: 30303
-        protocol: UDP
-        targetPort: 30303
-      - name: p2p-tcp
-        port: 30303
-        protocol: TCP
-      selector:
-        name: node-g1
-  - apiVersion: v1
-    kind: Service
-    metadata:
-      name: g2
-    spec:
-      ports:
-      - name: p2p-udp
-        port: 30303
-        protocol: UDP
-        targetPort: 30303
-      - name: p2p-tcp
-        port: 30303
-        protocol: TCP
-      selector:
-        name: node-g2
-  - apiVersion: v1
-    kind: Service
-    metadata:
       name: gm1
     spec:
       ports:
@@ -66,6 +36,51 @@ items:
   - apiVersion: v1
     kind: Service
     metadata:
+      name: g1
+    spec:
+      ports:
+      - name: p2p-udp
+        port: 30303
+        protocol: UDP
+        targetPort: 30303
+      - name: p2p-tcp
+        port: 30303
+        protocol: TCP
+      selector:
+        name: node-g1
+  - apiVersion: v1
+    kind: Service
+    metadata:
+      name: g2
+    spec:
+      ports:
+      - name: p2p-udp
+        port: 30303
+        protocol: UDP
+        targetPort: 30303
+      - name: p2p-tcp
+        port: 30303
+        protocol: TCP
+      selector:
+        name: node-g2
+  - apiVersion: v1
+    kind: Service
+    metadata:
+      name: g3
+    spec:
+      ports:
+      - name: p2p-udp
+        port: 30303
+        protocol: UDP
+        targetPort: 30303
+      - name: p2p-tcp
+        port: 30303
+        protocol: TCP
+      selector:
+        name: node-g3
+  - apiVersion: v1
+    kind: Service
+    metadata:
       name: p1
     spec:
       ports:
@@ -78,3 +93,33 @@ items:
         protocol: TCP
       selector:
         name: node-p1
+  - apiVersion: v1
+    kind: Service
+    metadata:
+      name: p2
+    spec:
+      ports:
+      - name: p2p-udp
+        port: 30303
+        protocol: UDP
+        targetPort: 30303
+      - name: p2p-tcp
+        port: 30303
+        protocol: TCP
+      selector:
+        name: node-p2
+  - apiVersion: v1
+    kind: Service
+    metadata:
+      name: p3
+    spec:
+      ports:
+      - name: p2p-udp
+        port: 30303
+        protocol: UDP
+        targetPort: 30303
+      - name: p2p-tcp
+        port: 30303
+        protocol: TCP
+      selector:
+        name: node-p3
