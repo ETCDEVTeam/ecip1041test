@@ -5,16 +5,13 @@ ECIP-1017 (Monetary Policy) Testing tool
 
 ECIP-1017 https://github.com/ethereumproject/ECIPs/blob/master/ECIPs/ECIP-1017.md
 
-Emulate a lifecycle of a network of ETC nodes through few monetary supply eras and verify that network works
- as expected without interruptions and produces correct reward.
+Emulate a lifecycle of a network of ETC nodes through few monetary supply eras and verify that network works as expected without interruptions and produces correct reward.
 
 # Implementation
 
 ## Network
 
-Run a network in a Google Cloud with Kubernetes. That allows to run testing by any 3rd party, it takes minutes to
- setup Google Cloud account and should cost less that a $100 for the full testing scenario. With current
- configuration it takes about 2 hours to get first results.
+Run a network in a Google Cloud with Kubernetes. That allows to run testing by any 3rd party, it takes minutes to setup Google Cloud account and should cost less that a $100 for the full testing scenario. With current configuration it takes about 2 hours to get first results.
 
 Preconfigured network topology to cover most of real life edges:
 
@@ -24,25 +21,33 @@ Preconfigured network topology to cover most of real life edges:
 
 image:topology.png[]
 
-You can drop any of the nodes during the test (`kubectl delete pod ....`) or make any other manual experiments. The
- network can easily get forked after that and both mining nodes will start following own fork and competing
- for a longer chain. Maybe it's not very desirable, but it's a normal behaviour. You can fix this by
- killing forked parts of the network.
+You can drop any of the nodes during the test (`kubectl delete pod ....`) or make any other manual experiments. The network can easily get forked after that and both mining nodes will start following own fork and competing for a longer chain. Maybe it's not very desirable, but it's a normal behaviour. You can fix this by killing forked parts of the network.
 
 ## Running
 
+### Requirements
+
+Ensure you've got at least Python 3.5 and have `pip` installed, then install the project's python dependencies.
+```
+⟠ pip --version
+pip 9.0.1 from /Users/ia/Envs/dfs/lib/python3.5/site-packages (python 3.5)
+⟠ pip install -r ./bin/requirements.txt
+```
+
+Lastly, you'll need to install the Google Cloud SDK command line tool, available
+here https://cloud.google.com/sdk/. For a general walkthrough of what the following setup
+steps (eg install and authorization), see ./setup-howto.md.
+
 ### Docker containers
 
-All images are already prepared and deployed to Docker Hub registry. If you want to use custom modification then
- most simple way would be to deploy your custom images directly to Google Cloud Containers registry, you'll need to
- update names in `k18s/*.rc.yaml` and use `bin/build.sh`.
+All images are already prepared and deployed to Docker Hub registry. If you want to use custom modification then the most simple way would be to deploy your custom images directly to Google Cloud Containers registry, you'll need to update the names in `k18s/*.rc.yaml` and use `bin/build.sh`.
 
-To use existing containers you don't need to do anything, just deploy as is and see status/verify.
+To use existing containers you don't need to do anything, just deploy as-is and see status/verify.
 
 ### Google Cloud
 
-Setup a new cluster on Google Cloud with at least 8 nodes. Standard VM type n1-standard-1 works perfectly for that demo,
- you can try a smaller VM if you wish.
+Setup a new cluster on Google Cloud with at least 8 nodes. Standard VM type n1-standard-1 works perfectly for that demo, you can try a smaller VM if you wish.
+Otherwise, default configurations as provided on the Google GUI will be fine.
 
 ### Deploy
 
