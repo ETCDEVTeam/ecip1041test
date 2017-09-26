@@ -1,2 +1,3 @@
 kubernetes
 pprint
+backports.ssl-match-hostname==3.5.0.1
