@@ -1,11 +1,11 @@
-ECIP-1017 (Monetary Policy) Testing tool
+ECIP-1041 (Remove Difficulty Bomb) Testing tool
 ========================================
 
 # Project Idea
 
-ECIP-1017 https://github.com/ethereumproject/ECIPs/blob/master/ECIPs/ECIP-1017.md
+ECIP-1041 https://github.com/ethereumproject/ECIPs/blob/master/ECIPs/ECIP-1041.md
 
-Emulate a lifecycle of a network of ETC nodes through few monetary supply eras and verify that network works as expected without interruptions and produces correct reward.
+Emulate a lifecycle of a network of ETC nodes after difficulty bomb removal and verify that network works as expected without interruptions and produces correct difficulty.
 
 # Implementation
 
