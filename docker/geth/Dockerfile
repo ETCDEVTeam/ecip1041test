@@ -21,7 +21,7 @@ RUN wget -O toxiproxy-2.1.2.deb --progress=dot:mega https://github.com/Shopify/t
 
 COPY docker/geth/start.sh /opt/geth/start.sh
 COPY docker/geth/addpeers.sh /opt/geth/addpeers.sh
-COPY docker/geth/ecip1017chain.json /opt/geth/ecip1017chain.json
+COPY docker/geth/ecip1041chain.json /opt/geth/ecip1041chain.json
 COPY bin/ids.py /opt/geth/
 
 RUN chmod +x /opt/geth/start.sh

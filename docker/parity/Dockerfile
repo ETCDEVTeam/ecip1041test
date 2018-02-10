@@ -12,7 +12,7 @@ RUN wget -O toxiproxy-2.1.2.deb --progress=dot:mega https://github.com/Shopify/t
     rm toxiproxy-2.1.2.deb
 
 COPY docker/parity/start.sh /opt/parity/start.sh
-COPY docker/parity/ecip1017chain.json /opt/parity/ecip1017chain.json
+COPY docker/parity/ecip1041chain.json /opt/parity/ecip1041chain.json
 COPY bin/ids.py /opt/parity/
 
 RUN chmod +x /opt/parity/start.sh
