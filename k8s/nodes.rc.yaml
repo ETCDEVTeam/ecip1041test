@@ -176,7 +176,7 @@ items:
         spec:
           containers:
             - name: node
-              image: "etcdev/ecip1017-parity:latest"
+              image: "etcdev/ecip1041-parity:latest"
               ports:
                 - name: rpc
                   containerPort: 8545
@@ -206,7 +206,7 @@ items:
         spec:
           containers:
             - name: node
-              image: "etcdev/ecip1017-parity:latest"
+              image: "etcdev/ecip1041-parity:latest"
               ports:
                 - name: rpc
                   containerPort: 8545
@@ -236,7 +236,7 @@ items:
         spec:
           containers:
             - name: node
-              image: "etcdev/ecip1017-parity:latest"
+              image: "etcdev/ecip1041-parity:latest"
               ports:
                 - name: rpc
                   containerPort: 8545
