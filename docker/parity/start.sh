@@ -33,7 +33,7 @@ NODEADDR=$(python ids.py addr $NODE_ID)
 BOOTNODES=$(tr '\n' ',' < peers.txt | sed -e 's/,$/\n/')
 
 OPTS="$OPTS --db-path /data"
-OPTS="$OPTS --chain /opt/parity/ecip1017chain.json"
+OPTS="$OPTS --chain /opt/parity/ecip1041chain.json"
 OPTS="$OPTS --no-discovery"
 OPTS="$OPTS --reserved-peers peers.txt"
 OPTS="$OPTS --bootnodes $BOOTNODES"
@@ -64,4 +64,4 @@ echo "    $OPTS"
 echo "-------------------------------------------------------"
 
 
-/parity/parity $OPTS
+/build/parity/target/release/parity $OPTS

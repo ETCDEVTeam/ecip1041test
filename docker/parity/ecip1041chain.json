@@ -15,7 +15,10 @@
           "eip160Transition": 70,
           "eip161abcTransition": 70,
           "eip161dTransition": 70,
-          "ecip1017EraRounds": 500
+		  "ecip1010PauseTransition": 80,
+		  "ecip1010ContinueTransition": 130,
+          "ecip1017EraRounds": 130,
+		  "bombDefuseTransition": 180
         }
       }
     },

@@ -1,0 +1,25 @@
+From 20519c286a7758c9d2393a6f81fb2f19ea2af611 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Tomasz=20Zdyba=C5=82?= <tomek@zdybal.lap.pl>
+Date: Mon, 12 Feb 2018 12:26:20 +0100
+Subject: [PATCH] Reduce EXP_DIFF_PERIOD to 100
+
+---
+ ethcore/src/ethereum/ethash.rs | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/ethcore/src/ethereum/ethash.rs b/ethcore/src/ethereum/ethash.rs
+index 52b4fc108..7798af4ab 100644
+--- a/ethcore/src/ethereum/ethash.rs
++++ b/ethcore/src/ethereum/ethash.rs
+@@ -344,7 +344,7 @@ impl Engine<EthereumMachine> for Arc<Ethash> {
+ 
+ impl Ethash {
+ 	fn calculate_difficulty(&self, header: &Header, parent: &Header) -> U256 {
+-		const EXP_DIFF_PERIOD: u64 = 100_000;
++		const EXP_DIFF_PERIOD: u64 = 100;
+ 		if header.number() == 0 {
+ 			panic!("Can't calculate genesis block difficulty");
+ 		}
+-- 
+2.16.1
+
