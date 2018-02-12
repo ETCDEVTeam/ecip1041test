@@ -19,7 +19,7 @@ Preconfigured network topology to cover most of real life edges:
  * 2 mining nodes at ends
  * loose connection between peers
 
-image:topology.png[]
+![Topology](topology.png)
 
 You can drop any of the nodes during the test (`kubectl delete pod ....`) or make any other manual experiments. The network can easily get forked after that and both mining nodes will start following own fork and competing for a longer chain. Maybe it's not very desirable, but it's a normal behaviour. You can fix this by killing forked parts of the network.
 
