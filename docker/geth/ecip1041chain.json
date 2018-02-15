@@ -1,7 +1,7 @@
 {
-  "id": "ecip1017",
+  "id": "ecip1041",
   "network": 42,
-  "name": "ECIP1017 Testchain",
+  "name": "ECIP1041 Testchain",
   "genesis": {
     "nonce": "0x00006d6f7264656e",
     "timestamp": "",
@@ -78,16 +78,28 @@
       },
       {
         "name": "Gotham",
-        "block": 500,
+        "block": 130,
         "features": [
           {
             "id": "reward",
             "options": {
               "type": "ecip1017",
-              "era": 500
+              "era": 130
             }
           }
         ]
+      },
+      {
+          "name": "Defuse Difficulty Bomb",
+          "block": 180,
+          "features": [
+              {
+                  "id": "difficulty",
+                  "options": {
+                      "type": "defused"
+                  }
+              }
+          ]
       }
     ],
     "badHashes": [

@@ -16,6 +16,7 @@ echo "ID: $NODE_PK"
 NODE_IP=$(host $NODE_ID | awk '/has address/ { print $4 ; exit }')
 echo "IP: $NODE_IP"
 
+sleep 30
 touch peers.txt
 while IFS=',' read -ra PEERS; do
     for name in ${PEERS[@]}; do
@@ -64,4 +65,4 @@ echo "    $OPTS"
 echo "-------------------------------------------------------"
 
 
-/build/parity/target/release/parity $OPTS
+/opt/parity/parity $OPTS

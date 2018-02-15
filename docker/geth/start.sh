@@ -16,15 +16,15 @@ echo "ID: $NODE_PK"
 NODE_IP=$(host $NODE_ID | awk '/has address/ { print $4 ; exit }')
 echo "IP: $NODE_IP"
 
-mkdir -p /data/ecip1017
-cp ./ecip1017chain.json /data/ecip1017/chain.json
+mkdir -p /data/ecip1041
+cp ./ecip1041chain.json /data/ecip1041/chain.json
 
 NODEADDR=$(python ids.py addr $NODE_ID)
 
 OPTS="$OPTS --datadir /data"
 OPTS="$OPTS --port 30303"
 OPTS="$OPTS --rpc --rpcaddr 0.0.0.0"
-OPTS="$OPTS --chain ecip1017"
+OPTS="$OPTS --chain ecip1041"
 #OPTS="$OPTS --bootnodes $BOOT --no-discover"
 #OPTS="$OPTS --no-discover"
 OPTS="$OPTS --nodekey nodekey.txt"
@@ -61,4 +61,4 @@ echo "    $OPTS"
 echo "-------------------------------------------------------"
 
 ./addpeers.sh &
-geth $OPTS
+/opt/geth/geth $OPTS

@@ -1,0 +1,25 @@
+From e7eae19a5218ad2bb0e3fe762c43913521485940 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Tomasz=20Zdyba=C5=82?= <tomek@zdybal.lap.pl>
+Date: Wed, 14 Feb 2018 11:44:34 +0100
+Subject: [PATCH] Reduce ExpDiffPeriod to 100
+
+---
+ core/block_validator.go | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/core/block_validator.go b/core/block_validator.go
+index 779695992..f58696ceb 100644
+--- a/core/block_validator.go
++++ b/core/block_validator.go
+@@ -31,7 +31,7 @@ import (
+ 
+ var (
+ 	DurationLimit          = big.NewInt(13) // The decision boundary on the blocktime duration used to determine whether difficulty should go up or not.
+-	ExpDiffPeriod          = big.NewInt(100000)
++	ExpDiffPeriod          = big.NewInt(100)
+ 	MinimumDifficulty      = big.NewInt(131072)
+ 	MinGasLimit            = big.NewInt(5000)    // Minimum the gas limit may ever be.
+ 	TargetGasLimit         = big.NewInt(4712388) // The artificial target
+-- 
+2.16.1
+

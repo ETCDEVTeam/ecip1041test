@@ -2,7 +2,7 @@
 
 set -e
 
-sleep 10
+sleep 30
 echo "Adding peers: $NODE_PEERS"
 
 touch peers.js
@@ -15,6 +15,7 @@ while IFS=',' read -ra PEERS; do
     done
 done <<<  "$NODE_PEERS"
 
-OPTS="--datadir /data --chain ecip1017"
+OPTS="--datadir /data --chain ecip1041"
 
-geth $OPTS --exec "loadScript('peers.js')" attach
+cat peers.js
+/opt/geth/geth $OPTS --exec "loadScript('peers.js')" attach
